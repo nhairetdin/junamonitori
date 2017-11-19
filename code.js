@@ -1,3 +1,9 @@
+const colorRingStroke = "rgb(27, 255, 154)";
+const colorActiveText = "rgb(27, 255, 154)";
+const colorInactiveText = "rgb(185, 185, 185)";
+const colorTrack = "#dfdfdf";
+const colorStrokeStation = "#dfdfdf";
+
 let STATIONS;
 let traindataAsJson;
 // let selectedStation;
@@ -93,7 +99,7 @@ function createEventElement(num, train) {
   document.getElementById("events").appendChild(c);
 
   let drawProgressbar = SVG('progressbar' + num).size(900, 10);
-  drawProgressbar.rect(900, 20).fill('#36393d');
+  drawProgressbar.rect(900, 20).fill('#dfdfdf');
   drawProgressbar.rect(train.waitTime, 20).fill('#00ffab').animate(train.waitTime * 1000, '-', 0).size(1, 10);
 }
 
@@ -105,43 +111,49 @@ function deleteEventElements() {
 }
 
 function loadSVGmap() {
-  let svgMap = Snap("#mapContainer");
+  let svgImage = Snap("#mapContainer");
 
-  Snap.load("testimage.svg", function(f) {
-    let stations = [];
+  Snap.load("asematx_plain4.svg", function(f) {
+    let stations = f.select("#station_nodes").node.children;
+    let track = f.select("#track");
 
-    let poh = f.select("#POH");
-    console.log(poh);
-    stations.push(f.select("#POH"));
-    stations.push(f.select("#KAN"));
-    stations.push(f.select("#MLO"));
-    stations.push(f.select("#MYR"));
-    stations.push(f.select("#LOH"));
-    stations.push(f.select("#MRL"));
-    stations.push(f.select("#VKS"));
-    stations.push(f.select("#VEH"));
-    // stations.push(f.select("#KT%C3%96"));
-    stations.push(f.select("#AVP"));
-
-    console.log(stations.length);
+    track.attr({
+      stroke: colorTrack
+    });
 
     for (let i = 0; i < stations.length; i++) {
-      stations[i].hover(function() {
-          stations[i].attr({
-            strokeWidth: 1.8
-          });
-        },
-        function() {
-          stations[i].attr({
-            strokeWidth: 0
-          });
-        });
+      let mapStationText = f.select("#" + stations[i].children[0].firstChild.id);
+      let mapStation = f.select("#" + stations[i].children[1].id);
+      let mapStationRing = f.select("#" + stations[i].children[2].id);
 
-      stations[i].click(function() {
-        loadTraindata(stations[i].attr('id'));
-      });
+      mapStation.attr({stroke: colorStrokeStation});
+      mapStationRing.attr({stroke: colorRingStroke});
+      mapStationText.attr({fill: colorInactiveText});
+
+      let hoverFunc = function() {
+        mapStationText.attr({fill: colorActiveText});
+
+        mapStationRing.stop().animate({
+          opacity: 1,
+          r: 22,
+          strokeWidth: 2.5
+        }, 700, mina.elastic);
+      }
+
+      let endAnim = function() {
+        mapStationText.attr({fill: colorInactiveText});
+
+        mapStationRing.stop().animate({
+          opacity: 0,
+          r: 40,
+          strokeWidth: 10
+        }, 500);
+      }
+
+      mapStation.mouseover(hoverFunc);
+      mapStation.mouseout(endAnim);
     }
-    svgMap.append(f);
+    svgImage.append(f);
   });
 }
 

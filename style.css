@@ -1,5 +1,5 @@
 body {
-  background-color: rgb(42, 46, 51);
+  background-color: rgb(255,255,255);
   font-family: 'Inconsolata', monospace;
 }
 
@@ -19,7 +19,7 @@ body {
   margin-right: auto;
   width: 900px;
   border-width: 3px;
-  border-color: rgba(42, 46, 51, 0.55);
+  border-color: rgba(42, 46, 51, 0);
   border-style: solid;
   padding: 5px;
 }
@@ -27,7 +27,7 @@ body {
 .event-info-container {
   padding: 5px;
   padding-bottom: 0px;
-  color: rgb(236, 236, 236);
+  color: rgb(185, 185, 185);
 }
 
 .event-progressbar-container {
