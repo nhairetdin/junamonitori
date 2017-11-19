@@ -1,0 +1,36 @@
+body {
+  background-color: rgb(42, 46, 51);
+  font-family: 'Inconsolata', monospace;
+}
+
+#events {
+  /*display: block;
+  margin-left: auto;
+  margin-right: auto;*/
+}
+#mapContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.event-container {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 900px;
+  border-width: 3px;
+  border-color: rgba(42, 46, 51, 0.55);
+  border-style: solid;
+  padding: 5px;
+}
+
+.event-info-container {
+  padding: 5px;
+  padding-bottom: 0px;
+  color: rgb(236, 236, 236);
+}
+
+.event-progressbar-container {
+  width: 900px;
+  height: 10px;
+}
