@@ -1,6 +1,20 @@
 body {
-  background-color: rgb(255,255,255);
+  /*background-color: rgb(255,255,255);*/
   font-family: 'Inconsolata', monospace;
+  background: #000046;
+  background: -webkit-linear-gradient(to right, #484033, #353535);
+  background: radial-gradient(ellipse at center, rgb(255, 255, 255) 60%, #ccc 99%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+h1 {
+  font-family: 'VT323', monospace;
+  text-align: center;
+  color: #9b9b9b;
+  font-size: 2.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 #events {
@@ -8,6 +22,7 @@ body {
   margin-left: auto;
   margin-right: auto;*/
 }
+
 #mapContainer {
   display: flex;
   justify-content: center;
@@ -27,10 +42,16 @@ body {
 .event-info-container {
   padding: 5px;
   padding-bottom: 0px;
-  color: rgb(185, 185, 185);
+  color: rgb(105, 105, 105);
 }
 
 .event-progressbar-container {
   width: 900px;
   height: 10px;
+}
+
+.colorPrimary {
+  color: rgb(27, 255, 154);
+  padding: 0;
+  margin: 0;
 }
