@@ -1,8 +1,8 @@
-const colorRingStroke = "rgb(27, 255, 154)";
-const colorActiveText = "rgb(27, 255, 154)";
-const colorInactiveText = "rgb(150,150,150)";
-const colorTrack = "#dfdfdf";
-const colorStrokeStation = "#dfdfdf";
+const COLOR_RING_STROKE = "rgb(27, 255, 154)";
+const COLOR_ACTIVE_TEXT = "rgb(27, 255, 154)";
+const COLOR_INACTIVE_TEXT = "rgb(150,150,150)";
+const COLOR_TRACK = "#dfdfdf";
+const COLOR_STROKE_STATION = "#dfdfdf";
 
 let STATIONS;
 let traindataAsJson;
@@ -113,12 +113,12 @@ function deleteEventElements() {
 function loadSVGmap() {
   let svgImage = Snap("#mapContainer");
 
-  Snap.load("asematx_plain6.svg", function(f) {
+  Snap.load("asematx_plain7_d.svg", function(f) {
     let stations = f.select("#station_nodes").node.children;
     let track = f.select("#track");
 
     track.attr({
-      stroke: colorTrack
+      stroke: COLOR_TRACK
     });
 
     for (let i = 0; i < stations.length; i++) {
@@ -128,16 +128,28 @@ function loadSVGmap() {
       let mapStationShortcode = mapStation.node.textContent.split(":")[0];
       mapStation.addClass("none");
 
-      mapStation.attr({stroke: colorStrokeStation});
-      mapStationRing.attr({stroke: colorRingStroke});
-      mapStationText.attr({fill: colorInactiveText});
+      mapStation.attr({
+        stroke: COLOR_STROKE_STATION,
+        r: 12
+      });
+      mapStationRing.attr({stroke: COLOR_RING_STROKE});
+      mapStationText.attr({fill: COLOR_INACTIVE_TEXT});
 
       mapStation.click(function() {
-        loadTraindata(mapStationShortcode.trim());
+        mapStationShortCodeTrimmed = mapStationShortcode.trim();
+        mapStationShortCodeTrimmed = mapStationShortCodeTrimmed.replace("Ä", "%C3%84");
+        mapStationShortCodeTrimmed = mapStationShortCodeTrimmed.replace("Ö", "%C3%96");
+        loadTraindata(mapStationShortCodeTrimmed);
       });
 
       let hoverFunc = function() {
-        mapStationText.attr({fill: colorActiveText});
+        mapStationText.attr({
+          fill: COLOR_ACTIVE_TEXT
+        });
+
+        // mapStation.stop().animate({
+        //     r: 16
+        // }, 700, mina.elastic);
 
         mapStationRing.stop().animate({
           opacity: 1,
@@ -147,7 +159,11 @@ function loadSVGmap() {
       }
 
       let endAnim = function() {
-        mapStationText.attr({fill: colorInactiveText});
+        mapStationText.attr({fill: COLOR_INACTIVE_TEXT});
+
+        // mapStation.stop().animate({
+        //     r: 12
+        // }, 800, mina.elastic);
 
         mapStationRing.stop().animate({
           opacity: 0,
@@ -184,3 +200,5 @@ function loadSVGmap() {
 // document.getElementById('btnDelete').addEventListener('click', () => {
 //   deleteEventElements();
 // });
+//Ö = KT%C3%96
+//Ä =
