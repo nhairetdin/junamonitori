@@ -33,10 +33,12 @@ function loadData(url, callback) {
 
 function parseTrains(data, selectedStation) {
   let trains = [];
+  let selectedStationDecoded = decodeURIComponent(selectedStation);
+  selectedStationDecoded = decodeURIComponent(selectedStationDecoded);
 
   data.forEach((train) => {
     train.timeTableRows.forEach((station) => {
-      if (station.stationShortCode === selectedStation && station.type === 'DEPARTURE') {
+      if (station.stationShortCode === selectedStationDecoded && station.type === 'DEPARTURE') {
         let dDeparture = station.liveEstimateTime ? new Date(station.liveEstimateTime) : new Date(station.scheduledTime);
         let dNow = new Date();
 
@@ -137,8 +139,8 @@ function loadSVGmap() {
 
       mapStation.click(function() {
         mapStationShortCodeTrimmed = mapStationShortcode.trim();
-        mapStationShortCodeTrimmed = mapStationShortCodeTrimmed.replace("Ä", "%C3%84");
-        mapStationShortCodeTrimmed = mapStationShortCodeTrimmed.replace("Ö", "%C3%96");
+        mapStationShortCodeTrimmed = encodeURIComponent(mapStationShortCodeTrimmed);
+        mapStationShortCodeTrimmed = encodeURIComponent(mapStationShortCodeTrimmed);
         loadTraindata(mapStationShortCodeTrimmed);
       });
 
