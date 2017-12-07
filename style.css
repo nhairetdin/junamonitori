@@ -16,13 +16,18 @@ h1 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
 }
-#train_ids {
+#train_ids, #train_ids2 {
   pointer-events: none;
 }
-#events {
-  /*display: block;
+
+#stationName {
+  width: 900px;
+  color: rgb(21, 231, 138);
+  font-weight: 500;
+  text-align: center;
+  display: block;
   margin-left: auto;
-  margin-right: auto;*/
+  margin-right: auto;
 }
 
 #mapContainer {
@@ -42,9 +47,31 @@ h1 {
 }
 
 .event-info-container {
+  display: flex;
+  white-space: pre;
   padding: 5px;
   padding-bottom: 0px;
   color: rgb(105, 105, 105);
+}
+
+.inner {
+  float: left;
+  width: 50%;
+}
+
+.inner2 {
+  float: left;
+  width: 50%;
+  text-align: right;
+  color: rgb(35, 35, 35);
+}
+
+.strongtext {
+  color: rgb(35, 35, 35);
+}
+
+.timeDeparture {
+  text-align: right;
 }
 
 .event-progressbar-container {
